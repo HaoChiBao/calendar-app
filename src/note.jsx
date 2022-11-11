@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import "./calendar.css";
+import "./note.css";
 
-class Calendar extends Component {
+class Note extends Component {
     state = {
         "loaded": false,
     } 
@@ -10,6 +10,9 @@ class Calendar extends Component {
         this.onLoaded()
         return (
             <React.Fragment>
+                <section id = "add-modal" class = "modal">
+                    {this.bindCard()}
+                </section>
                 <div id = "content">
                     <section id = "slide">
                         <div className = "slider" id = "slider-left"></div>
@@ -18,12 +21,19 @@ class Calendar extends Component {
                             <h2 id = "header2">JOTME.</h2>
                         </div>
                         <div className = "slider" id = "slider-right"></div>
+                        <div id = "add">
+                            <div class = "add-plus" id = "horizontal"></div>
+                            <div class = "add-plus" id = "vertical"></div>
+                        </div>
                     </section>
+                    <section id = "tiblits">
+                        <div id = "cart">
 
+                        </div>
+                    </section>
                     <section id = "info">
-                        {this.bindCard()}
-                    </section> 
-                    
+                        
+                    </section>                     
                 </div>
             </React.Fragment>
         );
@@ -61,12 +71,19 @@ class Calendar extends Component {
     onLoaded = () =>{
         if(!this.state.loaded){
             this.state.loaded = true;
-            
+
             // setTimeout(() => {}, 1000)
 
             let run = setTimeout(() => {
+                const content = document.getElementById("content");
+                
+                const addModal = document.getElementById("add-modal");
+                addModal.style.top = "-50rem";
+
                 const slide = document.getElementById("slide");
                 const slideInfo = document.getElementById("slideInfo");
+                slideInfo.style.width = "33rem";
+
                 const info = document.getElementById("info");
 
                 const sliderLeft = document.getElementById("slider-left");
@@ -75,7 +92,13 @@ class Calendar extends Component {
                 const header1 = document.getElementById("header1");
                 const header2 = document.getElementById("header2");
 
-                slideInfo.style.width = "33rem";
+                const tiblits = document.getElementById("tiblits");
+                const add = document.getElementById("add");
+
+                const addHorizontal = document.getElementById("horizontal");
+                const addVertical = document.getElementById("vertical");
+
+
 
                 setTimeout(() => {
                     slideInfo.style.width = "0rem";
@@ -99,10 +122,48 @@ class Calendar extends Component {
                                 slide.style.top = "2%"
                                 slide.style.left = "2%"
 
-                                info.style.animationName = "fadeIn"
-                                info.style.animationDuration = "2s";
+                                
+                                tiblits.style.animationName = "fadeIn"
+                                tiblits.style.animationDuration = "2s";
+                                tiblits.style.opacity = "1";
+
+                                // info.style.animationName = "fadeIn"
+                                // info.style.animationDuration = "2s";
+                                // info.style.opacity = "1"
                                 // info.style.animationDuration = "0s"
-                                info.style.opacity = "1"
+                                setTimeout(() => {
+                                    add.style.opacity = "1";
+                                    add.style.animationName = "addSlide"
+                                    add.style.animationDuration = "1s";
+                                    add.style.right = "-5rem";
+
+                                    setTimeout(() => {
+                                        addHorizontal.style.width = "3.5rem";
+                                        addVertical.style.height = "3.5rem";
+
+                                        setTimeout(() => {
+                                            addHorizontal.style.width = "3rem";
+                                            addVertical.style.height = "3rem";
+                                        }, 600)
+
+                                        window.addEventListener("keypress", (e) => {
+                                            if(e.key == "Enter"){
+                                                this.runModal(addModal, content)
+                                            }
+                                        })
+
+                                        add.addEventListener("click", () => {
+                                            add.style.transform = "scale(0.8)";
+                                            setTimeout(() => {
+                                                add.style.transform = "scale(1)";
+                                                setTimeout(() => {
+                                                    this.runModal(addModal, content)
+                                                }, 500)
+                                            }, 500)
+                                        })
+                                    }, 1000)
+
+                                }, 2000)
 
                             }, 1000)
 
@@ -110,19 +171,20 @@ class Calendar extends Component {
 
                     }, 800)
 
-                }, 1500)
+                }, 2000)
 
             }, 1000);
 
 // test
+            //                                     }, 0)
+            //                                 }, 0)
+            //                             })
+            //                         }, 0)
+            //                     }, 0)
             //                 }, 0)
-
             //             }, 0)
-
             //         }, 0)
-
             //     }, 0)
-
             // }, 0);
 
 
@@ -131,11 +193,22 @@ class Calendar extends Component {
         }
     }
 
-    openSlide() {
-
+    modalState(){
+        const modal = document.getElementById("add-modal");
+        if(modal.style.top == "-50rem"){return false} else {return true}
+   }
+    runModal(modal, content){
+        const modalState = this.modalState();
+        if(modalState){
+            content.style.filter = "blur(0px)";
+            modal.style.top = "-50rem"
+        } else {
+            content.style.filter = "blur(5px)";
+            modal.style.top = "4rem"
+        }
     }
 }
  
-export default Calendar;
+export default Note;
 
 // Hi honey this me coding

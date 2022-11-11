@@ -1,3 +1,5 @@
+
+
 /* center everything in body */
 #content {
     display: flex;
@@ -7,6 +9,29 @@
     height: 100vh;
     padding: 0rem;
     overflow: hidden;
+    transition: 1s;
+    filter: blur(0px);
+}
+
+#add-modal{
+    position: absolute;
+    z-index: 50;
+    
+    left: 50%;
+    transform: translateX(-50%);
+    /* top: 4rem; */
+    top: -50rem;
+
+    min-width: 20rem;
+    min-height: 30rem;
+
+    width: 100%;
+    height: 100%;
+    
+    max-width: 30rem;
+    max-height: 40rem;
+
+    transition: 1s;
 }
 
 #slide {
@@ -14,7 +39,7 @@
     align-items: center;
     justify-content: center;
     padding: 1rem;
-    overflow: hidden;
+    /* overflow: hidden; */
     transition: 0.5s;
     position: absolute;
     width: 60%;
@@ -38,13 +63,15 @@
 #slide #slideInfo{
     width: 0rem;
     height:100%;
-    margin: 0.1rem;
+    /* margin: 0.1rem; */
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: 0.8s;
     overflow: hidden;
+    z-index: 10;
+    background-color: white;
 }
 
 #slide h1{
@@ -58,6 +85,61 @@
     color:transparent;
     font-size: 5rem;
     margin: 0px;
+}
+
+#slide #add {
+    width: 4rem;
+    height: 4rem;
+    border: 0.3rem solid black;
+    border-radius: 1rem;
+    position: absolute;
+    right: 2rem;
+    /* right: -5rem; */
+    z-index: 5;
+    transition: 0.5s;
+    opacity: 0;
+    padding: 0rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/* 
+@keyframes addClick {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(0.9);
+    }
+    100% {
+        transform: scale(1);
+    }
+} */
+
+#slide #add:hover{
+    background-color: black;
+}
+
+#slide #add:hover .add-plus{
+    background-color: white;
+}
+
+#slide #add .add-plus{
+    width: 0.4rem;
+    height: 0.4rem;
+    background-color: black;
+    border-radius: 4rem;
+    position: absolute;
+    transition: 0.7s;
+}
+
+@keyframes addSlide {
+    from{
+        right: 2rem;
+    }
+    to{
+        right: -5rem;
+    }
 }
 
 #slide .slider {
@@ -106,6 +188,7 @@
     padding:0rem;
     border-radius: 2rem;
     border: 2px solid black;
+    background-color: white;
 }
 
 .divider {
@@ -158,6 +241,34 @@
     position: relative;
     display: flex;
     justify-content: center;
+}
+
+/* css for the component of the site */
+#tiblits{
+    width: 95%;
+    height: 75%;
+    bottom: 0rem;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    overflow: hidden;
+    margin:1rem;
+    padding:1rem;
+    opacity: 0;
+}
+
+#tiblits #cart{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    overflow: hidden;
+    border: 2px solid black;
+    border-radius: 2rem;
 }
 
 
