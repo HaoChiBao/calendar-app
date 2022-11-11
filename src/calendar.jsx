@@ -106,7 +106,6 @@ class Calendar extends Component {
 
                             }, 1000)
 
-
                         }, 1000)
 
                     }, 800)
